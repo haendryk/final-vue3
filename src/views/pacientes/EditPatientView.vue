@@ -31,7 +31,7 @@
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
 export default {
-  name: 'EditPaciente',
+  name: 'EditPatient',
   data() {
     return {
 
@@ -75,7 +75,7 @@ export default {
           if (response.status == '200') {
             vm.$emit('on-update', response.data);
           }
-          console.log(response); vm.itemList = response.data;
+          //console.log(response); vm.itemList = response.data;
         })
         .catch(function (error) {
           console.error(error);

@@ -1,19 +1,13 @@
 <template>
   <div>
-    <h1>Registrar Cliente</h1>
+    <h1>Registrar Paciente</h1>
     <form @submit.prevent="submitForm()">
       <div class="form-group">
         <label for="name">Nombre:</label>
         <input type="text" id="name" v-model="form.nombre" :class="{ 'is-invalid': errors.nombre }"
           placeholder="Ingrese el nombre" />
         <div v-if="errors.nombre" class="invalid-feedback">{{ errors.nombre }}</div>
-      </div>function (response) {
-        if (response.status == '201') {
-          vm.$emit('on-register', response.data);
-        }
-        console.log(response); vm.itemList = response.data;
-      }
-
+      </div>
       <div class="form-group">
         <label for="phone">Teléfono:</label>
         <input type="tel" id="phone" v-model="form.telefono" :class="{ 'is-invalid': errors.telefono }"
@@ -36,7 +30,7 @@
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
 export default {
-  name: 'RegisterClient',
+  name: 'RegisterPatient',
   data() {
     return {
       form: {
@@ -83,7 +77,7 @@ export default {
     },
     save() {
       const vm = this;
-      this.axios.post(this.baseUrl + "/clientes", this.form)
+      this.axios.post(this.baseUrl + "/pacientes", this.form)
         .then(function (response) {
           if (response.status == '201') {
             vm.$emit('on-register', response.data);

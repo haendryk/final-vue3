@@ -11,7 +11,7 @@
   export default {
     name: 'Modal',
     props: {
-      finalValue: {
+      modelValue: {
         type: Boolean,
         required: true
       }

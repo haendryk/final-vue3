@@ -18,10 +18,15 @@
                 <label for="fecha"> Fecha: </label>
                 <input type="date" id="fecha" v-model="filter.fecha" placeholder="Ingrese la fecha" />
 
-                <label for="veterinario"> Veterinario: </label>
-                <select id="veterinario" v-model="filter.veterinarioId">
+                <label for="medico"> Medico: </label>
+                <!-- <select id="medico" v-model="filter.medicoId" :class="{ 'is-invalid': errors.medicoId }">
                     <option value="">Todos</option>
-                    <option :value="veterinario.id" v-for="(veterinario, index) in veterinarioList" :key="`veterinario-${index}`">{{ veterinario.nombre }}
+                    <option :value="medico.id" v-for="(medico, index) in medicoList" :key="`medico-${index}`">{{ medico.nombre }}
+                    </option> 
+                </select> -->
+                <select id="medico" v-model="filter.medicoId">
+                    <option value="">Todos</option>
+                    <option :value="medico.id" v-for="(medico, index) in medicoList" :key="`medico-${index}`">{{ medico.nombre }}
                     </option>
                   </select>
                 <button type="submit" class="btn btn-lith">Fitrar</button>
@@ -33,9 +38,8 @@
                     <th>No.</th>
                     <th>Fecha</th>
                     <th>Hora</th>
-                    <th>Veterinario</th>
-                    <th>Cliente</th>
-                    <th>Mascota</th>
+                    <th>paciente</th>
+                    <th>medico</th>
                     <th>Motivo</th>
                     <th></th>
                 </tr>
@@ -45,9 +49,8 @@
                     <td>{{ 1 + index }}</td>
                     <td>{{ item.fecha }}</td>
                     <td>{{ item.hora }}</td>
-                    <td>{{ item.veterinario.nombre }}</td>
-                    <td>{{ item.cliente.nombre }}</td>
-                    <td>{{ item.mascota.nombre }}</td>
+                    <td>{{ item.paciente.nombre }}</td>
+                    <td>{{ item.medico.nombre }}</td>
                     <td>{{ item.motivo }}</td>
                     <td>
                         <button @click="edit(item)" class="btn btn-dark" style="margin-right: 15px;">Editar</button>
@@ -78,11 +81,11 @@ export default {
             textToSearch: '',
             textToFilter: '',
             itemList: [],
-            veterinarioList: [],
+            medicoList: [],
             path: '',
             filter: {
                 fecha: null,
-                veterinarioId:''
+                medicoId:''
             }
         }
     },
@@ -97,24 +100,24 @@ export default {
         ...mapActions(['increment']),
         getList() {
             const vm = this;
-            this.path = this.baseUrl + "/citas?_sort=fecha,hora&_order=desc,asc&_expand=cliente&_expand=mascota&_expand=veterinario" + this.textToFilter + "&q=" + this.textToSearch;
-            this.axios.get(this.baseUrl + "/citas?_sort=fecha,hora&_order=desc,asc&_expand=cliente&_expand=mascota&_expand=veterinario" + this.textToFilter + "&q=" + this.textToSearch)
+            this.axios.get(this.baseUrl + "/citas?_sort=fecha,hora&_order=desc,asc&_expand=paciente&_expand=medico" + this.textToFilter + "&q=" + this.textToSearch)
                 .then(function (response) {
                     vm.itemList = response.data;
+                    console.log(vm.itemList);
                 })
                 .catch(function (error) {
                     console.error(error);
                 });
         },
-        getVeterinarioList() {
-            const vm = this;
-            this.axios.get(this.baseUrl + "/veterinarios")
-                .then(function (response) {
-                    vm.veterinarioList = response.data;
-                })
-                .catch(function (error) {
-                    console.error(error);
-                });
+        getMedicoList() {
+        const vm = this;
+        this.axios.get(this.baseUrl + "/medicos")
+            .then(function (response) {
+            vm.medicoList = response.data;
+            })
+            .catch(function (error) {
+            console.error(error);
+            });
         },
         edit(item) {
             this.itemToEdit = Object.assign({}, item);
@@ -142,8 +145,8 @@ export default {
             if (this.filter.fecha != null && this.filter.fecha != '') {
                 this.textToFilter += "&fecha=" + this.filter.fecha;
             }
-            if (this.filter.veterinarioId != null && this.filter.veterinarioId != '') {
-                this.textToFilter += "&veterinarioId=" + this.filter.veterinarioId;
+            if (this.filter.medicoId != null && this.filter.medicoId != '') {
+                this.textToFilter += "&medicoId=" + this.filter.medicoId;
             }
             this.getList();
         },
@@ -175,7 +178,7 @@ export default {
     },
     mounted() {
         this.getList();
-        this.getVeterinarioList();
+        this.getMedicoList();
     },
     emits: [] // los eventos personalizados que el componente puede emitir.
 }

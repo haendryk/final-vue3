@@ -4,38 +4,28 @@
     <form @submit.prevent="submitForm" v-if="form">
 
       <div class="form-group">
-        <label for="veterinario">Veterinario:</label>
-        <select id="veterinario" v-model="form.veterinarioId" :class="{ 'is-invalid': errors.veterinarioId }">
-          <option :value="veterinario.id" v-for="(veterinario, index) in veterinarioList" :key="`veterinario-${index}`">{{ veterinario.nombre }}
+        <label for="medico">medico:</label>
+        <select id="medico" v-model="form.medicoId" :class="{ 'is-invalid': errors.medicoId }">
+          <option :value="medico.id" v-for="(medico, index) in medicoList" :key="`medico-${index}`">{{ medico.nombre }}
           </option>
         </select>
-        <div v-if="errors.veterinarioId" class="invalid-feedback">{{ errors.veterinarioId }}</div>
+        <div v-if="errors.medicoId" class="invalid-feedback">{{ errors.medicoId }}</div>
       </div>
 
       <div class="form-group">
-        <label for="cliente">Cliente:</label>
-        <select id="cliente" v-model="form.clienteId" :class="{ 'is-invalid': errors.clienteId }" @change="setMascotas()">
-          <option :value="cliente.id" v-for="(cliente, index) in clienteList" :key="`cliente-${index}`">{{ cliente.nombre }}
+        <label for="paciente">paciente:</label>
+        <select id="paciente" v-model="form.pacienteId" :class="{ 'is-invalid': errors.pacienteId }">
+          <option :value="paciente.id" v-for="(paciente, index) in pacienteList" :key="`paciente-${index}`">{{ paciente.nombre }}
           </option>
         </select>
-        <div v-if="errors.clienteId" class="invalid-feedback">{{ errors.clienteId }}</div>
-      </div>
-
-      <div class="form-group">
-        <label for="mascota">Mascota:</label>
-        <select id="mascota" v-model="form.mascotaId" :class="{ 'is-invalid': errors.mascotaId }">
-          <option :value="mascota.id" v-for="(mascota, index) in mascotaList" :key="`cliente-${index}`">{{ mascota.nombre }}
-          </option>
-        </select>
-        <div v-if="errors.mascotaId" class="invalid-feedback">{{ errors.mascotaId }}</div>
+        <div v-if="errors.pacienteId" class="invalid-feedback">{{ errors.pacienteId }}</div>
       </div>
 
       <div class="form-group">
         <label for="motivo">Motivo:</label>
-        <select id="motivo" v-model="form.motivo" :class="{ 'is-invalid': errors.motivo }">
-          <option :value="motivo" v-for="(motivo, index) in motivoList" :key="`motivo-${index}`">{{ motivo }}</option>
-        </select>
-        <div v-if="errors.motivo" class="invalid-feedback">{{ errors.motivo }}</div>
+        <input type="text" id="motivo" v-model="form.motivo" :class="{ 'is-invalid': errors.motivo }"
+          placeholder="Ingrese el motivo" />
+        <div v-if="errors.fecha" class="invalid-feedback">{{ errors.motivo }}</div>
       </div>
 
       <div class="form-group">
@@ -63,15 +53,10 @@ export default {
   name: 'CitaEdit',
   data() {
     return {
-      veterinarioList: [],
-      clienteList: [],
+      medicoList: [],
+      pacienteList: [],
       mascotaList: [],
-      motivoList: [
-        "Vacunación",
-        "Revisión cardiológica",
-        "Chequeo general",
-        "Chequeo dermatológico"
-      ],
+      motivoList: null,
       errors: {}
     };
   },
@@ -81,16 +66,12 @@ export default {
     validateForm() {
       this.errors = {};
 
-      if (!this.form.veterinarioId) {
-        this.errors.veterinarioId = 'El Veterinario es obligatorio.';
+      if (!this.form.medicoId) {
+        this.errors.medicoId = 'El medico es obligatorio.';
       }
 
-      if (!this.form.clienteId) {
-        this.errors.clienteId = 'El Cliente es obligatoria.';
-      }
-      
-      if (!this.form.mascotaId) {
-        this.errors.mascotaId = 'La mascota es obligatorio.';
+      if (!this.form.pacienteId) {
+        this.errors.pacienteId = 'El paciente es obligatoria.';
       }
 
       if (!this.form.motivo) {
@@ -104,23 +85,20 @@ export default {
       if (!this.form.hora) {
         this.errors.hora = 'La hora es obligatorio.';
       }
-
-
       return Object.keys(this.errors).length === 0;
     },
 
     submitForm() {
       if (this.validateForm()) {
-        // Enviar los datos al servidor
         this.save();
-        // Reiniciar el formulario
         this.form = {
-          clienteId: null
+          pacienteId: null
         };
       }
     },
     save() {
       const vm = this;
+      console.log(this.form);
       this.axios.patch(this.baseUrl + "/citas/"+this.item.id, this.form)
         .then(function (response) {
           if (response.status == '200') {
@@ -132,21 +110,21 @@ export default {
           console.error(error);
         });
     },
-    getVeterinarioList() {
+    getmedicoList() {
       const vm = this;
-      this.axios.get(this.baseUrl + "/veterinarios")
+      this.axios.get(this.baseUrl + "/medicos")
         .then(function (response) {
-          vm.veterinarioList = response.data;
+          vm.medicoList = response.data;
         })
         .catch(function (error) {
           console.error(error);
         });
     },
-    getClienteList() {
+    getpacienteList() {
       const vm = this;
-      this.axios.get(this.baseUrl + "/clientes")
+      this.axios.get(this.baseUrl + "/pacientes")
         .then(function (response) {
-          vm.clienteList = response.data;
+          vm.pacienteList = response.data;
         })
         .catch(function (error) {
           console.error(error);
@@ -154,7 +132,7 @@ export default {
     },
     setMascotas(){
       const vm = this;
-            this.axios.get(this.baseUrl + "/mascotas?clienteId=" + this.form.clienteId)
+            this.axios.get(this.baseUrl + "/mascotas?pacienteId=" + this.form.pacienteId)
                 .then(function (response) {
                     vm.mascotaList = response.data;
                 })
@@ -175,8 +153,8 @@ export default {
     }
   },
   mounted() {
-    this.getClienteList();
-    this.getVeterinarioList();
+    this.getpacienteList();
+    this.getmedicoList();
   },
 }
 </script>

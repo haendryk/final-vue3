@@ -1,10 +1,10 @@
 <template>
     <div>
         <Modal v-model:modelValue="showModalNuevo">
-            <MascotaNew @on-register="onRegister($event)"/>
+            <treatmentNew @on-register="onRegister($event)"/>
         </Modal>
         <Modal v-model:modelValue="showModalEdit">
-            <MascotaEdit @on-update="onUpdate($event)" :item="itemToEdit"/>
+            <treatmentEdit @on-update="onUpdate($event)" :item="itemToEdit"/>
         </Modal>
         <h1>Lista de Mascotas</h1>
         <button @click="showModalNuevo = true" class="btn btn-primary">Nuevo</button>
@@ -15,10 +15,6 @@
                 <tr>
                     <th>No.</th>
                     <th>Nombre</th>
-                    <th>Especie</th>
-                    <th>Raza</th>
-                    <th>Edad</th>
-                    <th>Dueno</th>
                     <th></th>
                 </tr>
             </thead>
@@ -26,12 +22,8 @@
                 <tr v-for="(item, index) in itemList" :key="index">
                     <td>{{ 1 + index }}</td>
                     <td>{{ item.nombre }}</td>
-                    <td>{{ item.especie }}</td>
-                    <td>{{ item.raza }}</td>
-                    <td>{{ item.edad }}</td>
-                    <td>{{ item.cliente.nombre }}</td>
                     <td>
-                        <button @click="irVacunas(item.id)" class="btn btn-info" style="margin-right: 15px;">Vacunas</button>
+                        <!-- <button @click="irVacunas(item.id)" class="btn btn-info" style="margin-right: 15px;">Vacunas</button> -->
                         <button @click="edit(item)" class="btn btn-dark" style="margin-right: 15px;">Editar</button>
                         <button @click="Eliminar(item.id)" class="btn btn-danger">Eliminar</button>
                     </td>
@@ -44,8 +36,8 @@
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
 import Modal from '../../components/Modal.vue'
-import MascotaNew from './MascotaNewView.vue'
-import MascotaEdit from './MascotaEditView.vue'
+import treatmentNew from './treatmentNewView.vue'
+import treatmentEdit from './treatmentEditView.vue'
 
 
 export default {
@@ -64,15 +56,15 @@ export default {
     components: {
         // Registro de componentes que se utilizaran.
         Modal,
-        MascotaNew,
-        MascotaEdit
+        treatmentNew,
+        treatmentEdit
     },
     methods: {
         // métodos que se pueden llamar desde la plantilla o desde otras partes del componente.
         ...mapActions(['increment']),
         getList() {
             const vm = this;
-            this.axios.get(this.baseUrl + "/mascotas?_expand=cliente&q=" + this.textToSearch)
+            this.axios.get(this.baseUrl + "/mascotas?_expand=paciente&q=" + this.textToSearch)
                 .then(function (response) {
                     vm.itemList = response.data;
                 })
