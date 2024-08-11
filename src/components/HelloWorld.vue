@@ -1,15 +1,15 @@
 <template>
  <div></div>
   <div class="hello">
-    <h1>{{ title }}</h1>
-    <h3>INTEGRANTES</h3>
+    <h1>{{ finalValue.title }}</h1>
+    <h3>INTEGRANTE</h3>
     <p>
       <ul>
         <li>
-          {{ names }}
+          {{ finalValue.names }}
         </li>
       </ul>
-      <a :href="github" target="_blank" rel="noopener">{{ titlegit }}</a>.
+      <a :href="finalValue.github" target="_blank" rel="noopener">{{ finalValue.titlegit }}</a>.
     </p>
     
    
@@ -22,9 +22,9 @@ export default {
   props: {
     finalValue: {
         title: String,
-        manes: String,
+        names: String,
         github: String,
-        titlegit: String,
+        titlegit: String
       }
   }
 }

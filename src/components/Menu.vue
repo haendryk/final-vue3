@@ -11,7 +11,7 @@
             <router-link to="/">Bienvenido</router-link>
             <router-link to="/login" v-if="!isLoged">Inicio de Sección</router-link>
             <router-link to="{{ getUser['role'] }} \ {{ getUser['name'] }}" v-if="isLoged">Cerrar Seción</router-link>
-            <router-link to="/cliente" v-if="canSee(['admin','secretaria','veterinario'])">Clientes</router-link>
+            <router-link to="/pacientes" v-if="canSee(['admin','secretaria','veterinario'])">Pacientes</router-link>
             <router-link to="/mascota" v-if="canSee(['admin','veterinario'])">Mascotas</router-link>
             <router-link to="/cita" v-if="canSee(['admin','secretaria'])">Citas</router-link> 
              <!-- <slot></slot> -->

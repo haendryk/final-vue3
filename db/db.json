@@ -1,5 +1,5 @@
 {
-  "clientes": [
+  "pacientes": [
     {
       "id": "1",
       "nombre": "Juan Lopez",
@@ -61,97 +61,118 @@
       "direccion": "123 Calle Real"
     }
   ],
-  "mascotas": [
+  "cie10": [
     {
       "id": "1",
-      "nombre": "Fido",
-      "especie": "Perro",
-      "raza": "Labrador",
-      "edad": "5",
-      "clienteId": "1"
+      "cod": "A00",
+      "nombre": "Cólera"
     },
     {
       "id": "2",
-      "nombre": "Whiskers",
-      "especie": "Gato",
-      "raza": "Siamés",
-      "edad": "3",
-      "clienteId": "1"
+      "cod": "A01 ",
+      "nombre": "Fiebres tifoidea y paratifoidea"
     },
     {
       "id": "3",
-      "nombre": "Rex",
-      "especie": "Perro",
-      "raza": "Pastor Alemán",
-      "edad": "7",
-      "clienteId": "2"
+      "cod": "A02",
+      "nombre": "Otras infecciones debidas a Salmonella"
     },
     {
       "id": "4",
-      "nombre": "Buddy",
-      "especie": "Perro",
-      "raza": "Beagle",
-      "edad": "4",
-      "clienteId": "3"
+      "cod": "A03",
+      "nombre": "Shigelosis"
     },
     {
       "id": "5",
-      "nombre": "Max",
-      "especie": "Perro",
-      "raza": "Bulldog",
-      "edad": "6",
-      "clienteId": "4"
+      "cod": "A04",
+      "nombre": "Otras infecciones intestinales bacterianas"
     },
     {
       "id": "6",
-      "nombre": "Bella",
-      "especie": "Gato",
-      "raza": "Persa",
-      "edad": "2",
-      "clienteId": "5"
+      "cod": "A05",
+      "nombre": "Otras intoxicaciones alimentarias bacterianas"
     },
     {
       "id": "7",
-      "nombre": "Luna",
-      "especie": "Gato",
-      "raza": "Maine Coon",
-      "edad": "3",
-      "clienteId": "6"
+      "cod": "A06",
+      "nombre": "Amebiasis"
     },
     {
       "id": "8",
-      "nombre": "Rocky",
-      "especie": "Perro",
-      "raza": "Boxer",
-      "edad": "4",
-      "clienteId": "7"
+      "cod": "A07",
+      "nombre": "Otras enfermedades intestinales debidas a protozoarios"
     },
     {
       "id": "9",
-      "nombre": "Charlie",
-      "especie": "Perro",
-      "raza": "Poodle",
-      "edad": "5",
-      "clienteId": "8"
+      "cod": "A08",
+      "nombre": "Infecciones intestinales debidas a virus y otros organismos especificados"
     },
     {
       "id": "10",
-      "nombre": "Lucy",
-      "especie": "Gato",
-      "raza": "Siberiano",
-      "edad": "1",
-      "clienteId": "9"
-    },
-    {
-      "id": "11",
-      "nombre": "Simba",
-      "especie": "Perro",
-      "raza": "Golden Retriever",
-      "edad": "6",
-      "clienteId": "10"
+      "cod": "A09",
+      "nombre": "Infecciones intestinales debidas a virus y otros organismos especificados"
     }
   ],
-  "veterinarios": [
+  "diagnostico": [
+    {
+      "id": "1",
+      "observacio": "xxxxxxxxxxxx xxxxxxxxxxx xxxxxxx",
+      "tratamiento": "xxxxx xxxxxxxx xxx xxxxxxx xxxxxxx",
+      "done":"True",
+      "pacienteId": "1",
+      "cie10Id":"10"
+    },
+    {
+      "id": "2",
+      "observacio": "xxxxxxxxxxxx xxxxxxxxxxx xxxxxxx",
+      "tratamiento": "xxxxx xxxxxxxx xxx xxxxxxx xxxxxxx",
+      "done":"True",
+      "pacienteId": "1",
+      "cie10Id":"1"
+    },
+    {
+      "id": "3",
+      "observacio": "xxxxxxxxxxxx xxxxxxxxxxx xxxxxxx",
+      "tratamiento": "xxxxx xxxxxxxx xxx xxxxxxx xxxxxxx",
+      "fecha": "2024-08-08",
+      "done":"True",
+      "pacienteId": "2",
+      "cie10Id":"8"
+    },
+    {
+      "id": "4",
+      "observacio": "xxxxxxxxxxxx xxxxxxxxxxx xxxxxxx",
+      "tratamiento": "xxxxx xxxxxxxx xxx xxxxxxx xxxxxxx",
+      "done":"True",
+      "pacienteId": "3",
+      "cie10Id":"6"
+    },
+    {
+      "id": "5",
+      "observacio": "xxxxxxxxxxxx xxxxxxxxxxx xxxxxxx",
+      "tratamiento": "xxxxx xxxxxxxx xxx xxxxxxx xxxxxxx",
+      "done":"True",
+      "pacienteId": "4",
+      "cie10Id":"5"
+    },
+    {
+      "id": "5",
+      "observacio": "xxxxxxxxxxxx xxxxxxxxxxx xxxxxxx",
+      "tratamiento": "xxxxx xxxxxxxx xxx xxxxxxx xxxxxxx",
+      "done":"True",
+      "pacienteId": "5",
+       "cie10Id":"9"
+    },
+    {
+      "id": "7",
+      "observacio": "xxxxxxxxxxxx xxxxxxxxxxx xxxxxxx",
+      "tratamiento": "xxxxx xxxxxxxx xxx xxxxxxx xxxxxxx",
+      "done":"True",
+      "pacienteId": "6",
+      "cie10Id":"10"
+    }
+  ],
+  "doctor": [
     {
       "id": "1",
       "nombre": "Dra. María López",
@@ -186,188 +207,83 @@
   "citas": [
     {
       "id": "1",
-      "clienteId": "1",
-      "mascotaId": "1",
-      "veterinarioId": "1",
+      "pacienteId": "1",
+      "doctorId": "1",
       "fecha": "2024-08-01",
       "hora": "10:00",
       "motivo": "Chequeo general"
     },
     {
       "id": "2",
-      "clienteId": "2",
-      "mascotaId": "3",
-      "veterinarioId": "2",
+      "pacienteId": "2",
+      "doctorId": "2",
       "fecha": "2024-08-02",
       "hora": "14:00",
       "motivo": "Revisión dermatológica"
     },
     {
       "id": "3",
-      "clienteId": "3",
-      "mascotaId": "4",
-      "veterinarioId": "3",
+      "pacienteId": "3",
+      "doctorId": "3",
       "fecha": "2024-08-03",
       "hora": "11:00",
       "motivo": "Vacunación"
     },
     {
       "id": "4",
-      "clienteId": "4",
-      "mascotaId": "5",
-      "veterinarioId": "4",
+      "pacienteId": "4",
+      "doctorId": "4",
       "fecha": "2024-08-04",
       "hora": "12:00",
       "motivo": "Chequeo general"
     },
     {
       "id": "5",
-      "clienteId": "5",
-      "mascotaId": "6",
-      "veterinarioId": "5",
+      "pacienteId": "5",
+      "doctorId": "5",
       "fecha": "2024-08-05",
       "hora": "09:00",
       "motivo": "Revisión cardiológica"
     },
     {
       "id": "6",
-      "clienteId": "6",
-      "mascotaId": "7",
-      "veterinarioId": "1",
+      "pacienteId": "6",
+      "doctorId": "1",
       "fecha": "2024-08-06",
       "hora": "10:30",
       "motivo": "Chequeo general"
     },
     {
       "id": "7",
-      "clienteId": "7",
-      "mascotaId": "8",
-      "veterinarioId": "2",
+      "pacienteId": "7",
+      "doctorId": "2",
       "fecha": "2024-08-07",
       "hora": "11:30",
       "motivo": "Chequeo dermatológico"
     },
     {
       "id": "8",
-      "clienteId": "8",
-      "mascotaId": "9",
-      "veterinarioId": "3",
+      "pacienteId": "8",
+      "doctorId": "3",
       "fecha": "2024-08-08",
       "hora": "13:00",
       "motivo": "Chequeo general"
     },
     {
       "id": "9",
-      "clienteId": "9",
-      "mascotaId": "10",
-      "veterinarioId": "4",
+      "pacienteId": "9",
+      "doctorId": "4",
       "fecha": "2024-08-09",
       "hora": "14:30",
       "motivo": "Chequeo general"
     },
     {
       "id": "10",
-      "clienteId": "10",
-      "mascotaId": "11",
-      "veterinarioId": "5",
+      "pacienteId": "10",
+      "doctorId": "5",
       "fecha": "2024-08-10",
       "hora": "09:30",
       "motivo": "Chequeo cardiológico"
-    }
-  ],
-  "vacunas": [
-    {
-      "id": "1",
-      "nombre": "Vacuna A",
-      "descripcion": "Descripción de la Vacuna A"
-    },
-    {
-      "id": "2",
-      "nombre": "Vacuna B",
-      "descripcion": "Descripción de la Vacuna B"
-    },
-    {
-      "id": "3",
-      "nombre": "Vacuna C",
-      "descripcion": "Descripción de la Vacuna C"
-    },
-    {
-      "id": "4",
-      "nombre": "Vacuna D",
-      "descripcion": "Descripción de la Vacuna D"
-    },
-    {
-      "id": "5",
-      "nombre": "Vacuna E",
-      "descripcion": "Descripción de la Vacuna E"
-    }
-  ],
-  "mascotasVacunas": [
-    {
-      "id": "1",
-      "mascotaId": "1",
-      "vacunaId": "1",
-      "fecha": "2024-06-01"
-    },
-    {
-      "id": "2",
-      "mascotaId": "1",
-      "vacunaId": "2",
-      "fecha": "2024-07-01"
-    },
-    {
-      "id": "3",
-      "mascotaId": "2",
-      "vacunaId": "1",
-      "fecha": "2024-07-15"
-    },
-    {
-      "id": "4",
-      "mascotaId": "3",
-      "vacunaId": "3",
-      "fecha": "2024-08-01"
-    },
-    {
-      "id": "5",
-      "mascotaId": "4",
-      "vacunaId": "4",
-      "fecha": "2024-08-02"
-    },
-    {
-      "id": "6",
-      "mascotaId": "5",
-      "vacunaId": "5",
-      "fecha": "2024-08-03"
-    },
-    {
-      "id": "7",
-      "mascotaId": "6",
-      "vacunaId": "1",
-      "fecha": "2024-08-04"
-    },
-    {
-      "id": "8",
-      "mascotaId": "7",
-      "vacunaId": "2",
-      "fecha": "2024-08-05"
-    },
-    {
-      "id": "9",
-      "mascotaId": "8",
-      "vacunaId": "3",
-      "fecha": "2024-08-06"
-    },
-    {
-      "id": "10",
-      "mascotaId": "9",
-      "vacunaId": "4",
-      "fecha": "2024-08-07"
-    },
-    {
-      "id": "11",
-      "mascotaId": "10",
-      "vacunaId": "5",
-      "fecha": "2024-08-08"
     }
   ],
   "usuarios": [
@@ -384,7 +300,7 @@
       "name": "Rosa",
       "email": "rosa@example.com",
       "password": "123456",
-      "role": "veterinario",
+      "role": "doctor",
       "token": "sdffalsdf82weids8dfasdfsd9f0w9exdi8s"
     },
     {
@@ -400,7 +316,7 @@
       "name": "Raul",
       "email": "raul@example.com",
       "password": "123456",
-      "role": "veterinario",
+      "role": "doctor",
       "token": "asdfasdfsf82weids8dfasdfsd9f0fsi8s"
     },
     {

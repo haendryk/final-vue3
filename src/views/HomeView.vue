@@ -1,7 +1,7 @@
 <template>
   <div class="home" style="text-align: center;">
     <img alt="Vue logo" src="../assets/logo.png" style="padding-top: 5em;">
-    <HelloWorld :finalValue="{title: String, manes: String, github: String, titlegit: String}"/>
+    <HelloWorld :finalValue="dataValue"/>
   </div>
 </template>
 
@@ -11,8 +11,17 @@ import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
   name: 'HomeView',
-  components: {
+  data() {
+        return {
+            dataValue:{
+              title: 'Final Vue 3', 
+              names: 'Osmar Hammel Peñaranda Iporre',
+              github: '#', 
+              titlegit: 'Projecto GitHub'}
+        }
+},
+components: {
     HelloWorld
-  }
+  },
 }
 </script>

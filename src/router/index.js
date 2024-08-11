@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import ClienteView from '../views/cliente/ClienteView'
+import patientsView from '../views/pacientes/patientsView'
 import MascotaView from '../views/mascota/MascotaView'
 import KardexVacunaView from '../views/mascota/KardexVacunaView'
 import CitaView from '../views/cita/CitaView'
@@ -19,10 +19,10 @@ const routes = [
     component: LoginView
   },
   {
-    path: '/cliente',
-    name: 'cliente',
-    component: ClienteView,
-    meta: { requiresAuth: true, role: ['admin','secretaria','veterinario'] } 
+    path: '/pacientes',
+    name: 'pacientes',
+    component: patientsView,
+    meta: { requiresAuth: true, role: ['admin','secretaria','doctor'] } 
   },
   {
     path: '/cita',
@@ -34,13 +34,13 @@ const routes = [
     path: '/mascota',
     name: 'mascota',
     component: MascotaView,
-    meta: { requiresAuth: true, role: ['admin','veterinario'] } 
+    meta: { requiresAuth: true, role: ['admin','doctor'] } 
   },
   {
     path: '/mascota/:id/vacunas',
     name: 'masctaVacunas',
     component: KardexVacunaView,
-    meta: { requiresAuth: true, role: ['admin','veterinario'] } 
+    meta: { requiresAuth: true, role: ['admin','doctor'] } 
   }
 ]
 

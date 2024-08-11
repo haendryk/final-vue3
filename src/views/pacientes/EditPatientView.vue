@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Editar Cliente</h1>
+    <h1>Editar Paciente</h1>
     <form @submit.prevent="submitForm">
       <div class="form-group">
         <label for="name">Nombre:</label>
@@ -31,7 +31,7 @@
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
 export default {
-  name: 'EditClient',
+  name: 'EditPaciente',
   data() {
     return {
 
@@ -70,7 +70,7 @@ export default {
     },
     save() {
       const vm = this;
-      this.axios.patch(this.baseUrl + "/clientes/" + this.item.id, this.form)
+      this.axios.patch(this.baseUrl + "/pacientes/" + this.item.id, this.form)
         .then(function (response) {
           if (response.status == '200') {
             vm.$emit('on-update', response.data);

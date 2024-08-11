@@ -1,12 +1,12 @@
 <template>
     <div>
         <Modal v-model:modelValue="showModalNuevo">
-            <RegisterClienteView @on-register="onRegister($event)" />
+            <RegisterPacienteView @on-register="onRegister($event)" />
         </Modal>
         <Modal v-model:modelValue="showModalEdit">
-            <EditClientView @on-update="onUpdate($event)" :item="itemToEdit" />
+            <EditPacienteView @on-update="onUpdate($event)" :item="itemToEdit" />
         </Modal>
-        <h1>Lista de Clientes</h1>
+        <h1>Lista de pacientes</h1>
         <button @click="showModalNuevo = true" class="btn btn-primary">Nuevo</button>
         <button @click="buscar()" class="btn btn-lith" style="float:right">Buscar</button>
         <input type="search" style="float:right" v-model="textToSearch" @search="buscar()">
@@ -39,11 +39,11 @@
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
 import Modal from '../../components/Modal.vue'
-import RegisterClienteView from './RegisterClientView.vue'
-import EditClientView from './EditClientView.vue'
+import RegisterPatientView from './RegisterPatientView.vue'
+import EditPatientView from './EditPatientView.vue'
 
 export default {
-    name: 'Cliente',
+    name: 'Paciente',
     data() {
         return {
             message: 'Hola Mundo',
@@ -59,15 +59,16 @@ export default {
     components: {
         // Registro de componentes que se utilizaran.
         Modal,
-        RegisterClienteView,
-        EditClientView
+        RegisterPatientView,
+        EditPatientView
     },
     methods: {
         // métodos que se pueden llamar desde la plantilla o desde otras partes del componente.
         ...mapActions(['increment']),
         getList() {
             const vm = this;
-            this.axios.get(this.baseUrl + "/clientes?_embed=mascotas&q=" + this.textToSearch)
+            // this.axios.get(this.baseUrl + "/pacientes?q=" + this.textToSearch)
+            this.axios.get(this.baseUrl + "/pacientes?q=" + this.textToSearch)
                 .then(function (response) {
                     console.log(response);
                     vm.itemList = response.data;
@@ -83,7 +84,7 @@ export default {
         Eliminar(id) {
             if (confirm("¿Esta Seguro de eliminar el registro?")) {
                 const vm = this;
-                this.axios.delete(this.baseUrl + "/clientes/" + id)
+                this.axios.delete(this.baseUrl + "/pacientes/" + id)
                     .then(function (response) {
                         console.log(response);
                         vm.getList();
