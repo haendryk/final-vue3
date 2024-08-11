@@ -1,10 +1,10 @@
 <template>
     <div>
         <Modal v-model:modelValue="showModalNuevo">
-            <RegisterPacienteView @on-register="onRegister($event)" />
+            <RegisterPatientView @on-register="onRegister($event)" />
         </Modal>
         <Modal v-model:modelValue="showModalEdit">
-            <EditPacienteView @on-update="onUpdate($event)" :item="itemToEdit" />
+            <EditPatientView @on-update="onUpdate($event)" :item="itemToEdit" />
         </Modal>
         <h1>Lista de pacientes</h1>
         <button @click="showModalNuevo = true" class="btn btn-primary">Nuevo</button>
