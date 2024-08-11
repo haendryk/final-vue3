@@ -1,0 +1,6 @@
+Final Vue3
+Nombre(s) de integrante(s):
+- Osmar Hammel Peñaranda Iporre
+Pasos para iniciar el proyecto
+1) npm install
+2) npm run serve
