@@ -70,7 +70,7 @@ export default {
     },
     save() {
       const vm = this;
-      this.axios.patch(this.baseUrl + "/pacientes/" + this.item.id, this.form)
+      this.axios.patch(this.baseUrl + "/patients/" + this.item.id, this.form)
         .then(function (response) {
           if (response.status == '200') {
             vm.$emit('on-update', response.data);

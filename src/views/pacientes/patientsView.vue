@@ -68,7 +68,7 @@ export default {
         getList() {
             const vm = this;
             // this.axios.get(this.baseUrl + "/pacientes?q=" + this.textToSearch)
-            this.axios.get(this.baseUrl + "/pacientes?q=" + this.textToSearch)
+            this.axios.get(this.baseUrl + "/patients?q=" + this.textToSearch)
                 .then(function (response) {
                     console.log(response);
                     vm.itemList = response.data;
@@ -84,7 +84,7 @@ export default {
         Eliminar(id) {
             if (confirm("¿Esta Seguro de eliminar el registro?")) {
                 const vm = this;
-                this.axios.delete(this.baseUrl + "/pacientes/" + id)
+                this.axios.delete(this.baseUrl + "/patients/" + id)
                     .then(function (response) {
                         console.log(response);
                         vm.getList();

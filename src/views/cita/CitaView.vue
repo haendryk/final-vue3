@@ -7,7 +7,6 @@
             <CitaEditView @on-update="onUpdate()" :item="itemToEdit" />
         </Modal>
         <h1>Lista de Citas</h1>
-        <div>{{path}}</div>
         <button @click="showModalNuevo = true" class="btn btn-primary">Nuevo</button>
         <button @click="buscar()" class="btn btn-lith" style="float:right">Buscar</button>
         <input type="search" style="float:right" v-model="textToSearch" @search="buscar()">
@@ -18,15 +17,15 @@
                 <label for="fecha"> Fecha: </label>
                 <input type="date" id="fecha" v-model="filter.fecha" placeholder="Ingrese la fecha" />
 
-                <label for="medico"> Medico: </label>
-                <!-- <select id="medico" v-model="filter.medicoId" :class="{ 'is-invalid': errors.medicoId }">
+                <label for="doctor"> doctor: </label>
+                <!-- <select id="doctor" v-model="filter.doctorId" :class="{ 'is-invalid': errors.doctorId }">
                     <option value="">Todos</option>
-                    <option :value="medico.id" v-for="(medico, index) in medicoList" :key="`medico-${index}`">{{ medico.nombre }}
+                    <option :value="doctor.id" v-for="(doctor, index) in doctorList" :key="`doctor-${index}`">{{ doctor.nombre }}
                     </option> 
                 </select> -->
-                <select id="medico" v-model="filter.medicoId">
+                <select id="doctor" v-model="filter.doctorId">
                     <option value="">Todos</option>
-                    <option :value="medico.id" v-for="(medico, index) in medicoList" :key="`medico-${index}`">{{ medico.nombre }}
+                    <option :value="doctor.id" v-for="(doctor, index) in doctorList" :key="`doctor-${index}`">{{ doctor.nombre }}
                     </option>
                   </select>
                 <button type="submit" class="btn btn-lith">Fitrar</button>
@@ -39,7 +38,7 @@
                     <th>Fecha</th>
                     <th>Hora</th>
                     <th>paciente</th>
-                    <th>medico</th>
+                    <th>doctor</th>
                     <th>Motivo</th>
                     <th></th>
                 </tr>
@@ -49,8 +48,8 @@
                     <td>{{ 1 + index }}</td>
                     <td>{{ item.fecha }}</td>
                     <td>{{ item.hora }}</td>
-                    <td>{{ item.paciente.nombre }}</td>
-                    <td>{{ item.medico.nombre }}</td>
+                    <td>{{ item.patient.nombre }}</td>
+                    <td>{{ item.doctor.nombre }}</td>
                     <td>{{ item.motivo }}</td>
                     <td>
                         <button @click="edit(item)" class="btn btn-dark" style="margin-right: 15px;">Editar</button>
@@ -81,11 +80,10 @@ export default {
             textToSearch: '',
             textToFilter: '',
             itemList: [],
-            medicoList: [],
-            path: '',
+            doctorList: [],
             filter: {
                 fecha: null,
-                medicoId:''
+                doctorId:''
             }
         }
     },
@@ -100,7 +98,7 @@ export default {
         ...mapActions(['increment']),
         getList() {
             const vm = this;
-            this.axios.get(this.baseUrl + "/citas?_sort=fecha,hora&_order=desc,asc&_expand=paciente&_expand=medico" + this.textToFilter + "&q=" + this.textToSearch)
+            this.axios.get(this.baseUrl + "/appointments?_sort=fecha,hora&_order=desc,asc&_expand=patient&_expand=doctor" + this.textToFilter + "&q=" + this.textToSearch)
                 .then(function (response) {
                     vm.itemList = response.data;
                     console.log(vm.itemList);
@@ -109,11 +107,11 @@ export default {
                     console.error(error);
                 });
         },
-        getMedicoList() {
+        getdoctorList() {
         const vm = this;
-        this.axios.get(this.baseUrl + "/medicos")
+        this.axios.get(this.baseUrl + "/doctors")
             .then(function (response) {
-            vm.medicoList = response.data;
+            vm.doctorList = response.data;
             })
             .catch(function (error) {
             console.error(error);
@@ -126,7 +124,7 @@ export default {
         Eliminar(id) {
             if (confirm("¿Esta Seguro de eliminar el registro?")) {
                 const vm = this;
-                this.axios.delete(this.baseUrl + "/citas/" + id)
+                this.axios.delete(this.baseUrl + "/appointments/" + id)
                     .then(function (response) {
                         vm.getList();
                         vm.$toast.show("Registro eliminado.", "danger");
@@ -145,8 +143,8 @@ export default {
             if (this.filter.fecha != null && this.filter.fecha != '') {
                 this.textToFilter += "&fecha=" + this.filter.fecha;
             }
-            if (this.filter.medicoId != null && this.filter.medicoId != '') {
-                this.textToFilter += "&medicoId=" + this.filter.medicoId;
+            if (this.filter.doctorId != null && this.filter.doctorId != '') {
+                this.textToFilter += "&doctorId=" + this.filter.doctorId;
             }
             this.getList();
         },
@@ -178,7 +176,7 @@ export default {
     },
     mounted() {
         this.getList();
-        this.getMedicoList();
+        this.getdoctorList();
     },
     emits: [] // los eventos personalizados que el componente puede emitir.
 }

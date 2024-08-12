@@ -6,7 +6,7 @@
         <Modal v-model:modelValue="showModalEdit">
             <treatmentEdit @on-update="onUpdate($event)" :item="itemToEdit"/>
         </Modal>
-        <h1>Lista de Mascotas</h1>
+        <h1>Lista de Diagnosticos</h1>
         <button @click="showModalNuevo = true" class="btn btn-primary">Nuevo</button>
         <button @click="buscar()" class="btn btn-lith" style="float:right">Buscar</button>
         <input type="search" style="float:right" v-model="textToSearch" @search="buscar()">
@@ -15,15 +15,26 @@
                 <tr>
                     <th>No.</th>
                     <th>Nombre</th>
+                    <th>Diagnostico</th>
+                    <th>Medicacion</th>
+                    <th>Observacion</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="(item, index) in itemList" :key="index">
                     <td>{{ 1 + index }}</td>
-                    <td>{{ item.nombre }}</td>
+                    <td>{{ item.patient.nombre }}</td>
+                    <td>{{ item.cie10.nombre }}</td>
                     <td>
-                        <!-- <button @click="irVacunas(item.id)" class="btn btn-info" style="margin-right: 15px;">Vacunas</button> -->
+                        <ul>
+                            <li>{{item.medicamento}}</li>
+                            <li>{{item.duracion}}</li>
+                            <li>{{item.dosis}}</li>
+                        </ul>
+                    </td>
+                    <td>{{ item.observacio }}</td>
+                    <td>
                         <button @click="edit(item)" class="btn btn-dark" style="margin-right: 15px;">Editar</button>
                         <button @click="Eliminar(item.id)" class="btn btn-danger">Eliminar</button>
                     </td>
@@ -41,7 +52,7 @@ import treatmentEdit from './treatmentEditView.vue'
 
 
 export default {
-    name: 'Mascota',
+    name: 'diagnostico',
     data() {
         return {
             currentPage: 1,
@@ -64,16 +75,14 @@ export default {
         ...mapActions(['increment']),
         getList() {
             const vm = this;
-            this.axios.get(this.baseUrl + "/mascotas?_expand=paciente&q=" + this.textToSearch)
+            this.axios.get(this.baseUrl + "/diagnoses?_expand=patient&_expand=treatment&_expand=cie10&q=" + this.textToSearch)
                 .then(function (response) {
                     vm.itemList = response.data;
+                    console.log(response.data);
                 })
                 .catch(function (error) {
                     console.error(error);
                 });
-        },
-        irVacunas(id){
-            this.$router.push("/mascota/"+id+"/vacunas");
         },
         edit(item) {
             this.itemToEdit = Object.assign({}, item);
@@ -82,7 +91,7 @@ export default {
         Eliminar(id) {
             if (confirm("¿Esta Seguro de eliminar el registro?")) {
                 const vm = this;
-                this.axios.delete(this.baseUrl + "/mascotas/" + id)
+                this.axios.delete(this.baseUrl + "/diagnoses/" + id)
                     .then(function (response) {
                         vm.getList();
                         vm.$toast.show("Registro eliminado.", "danger");

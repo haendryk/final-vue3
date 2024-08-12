@@ -4,21 +4,21 @@
     <form @submit.prevent="submitForm" v-if="form">
 
       <div class="form-group">
-        <label for="medico">medico:</label>
-        <select id="medico" v-model="form.medicoId" :class="{ 'is-invalid': errors.medicoId }">
-          <option :value="medico.id" v-for="(medico, index) in medicoList" :key="`medico-${index}`">{{ medico.nombre }}
+        <label for="doctor">medico:</label>
+        <select id="doctor" v-model="form.doctorId" :class="{ 'is-invalid': errors.doctorId }">
+          <option :value="doctor.id" v-for="(doctor, index) in doctorList" :key="`doctor-${index}`">{{ doctor.nombre }}
           </option>
         </select>
-        <div v-if="errors.medicoId" class="invalid-feedback">{{ errors.medicoId }}</div>
+        <div v-if="errors.doctorId" class="invalid-feedback">{{ errors.doctorId }}</div>
       </div>
 
       <div class="form-group">
-        <label for="paciente">paciente:</label>
-        <select id="paciente" v-model="form.pacienteId" :class="{ 'is-invalid': errors.pacienteId }">
-          <option :value="paciente.id" v-for="(paciente, index) in pacienteList" :key="`paciente-${index}`">{{ paciente.nombre }}
+        <label for="patient">paciente:</label>
+        <select id="patient" v-model="form.patientId" :class="{ 'is-invalid': errors.patientId }">
+          <option :value="patient.id" v-for="(patient, index) in patientList" :key="`patient-${index}`">{{ patient.nombre }}
           </option>
         </select>
-        <div v-if="errors.pacienteId" class="invalid-feedback">{{ errors.pacienteId }}</div>
+        <div v-if="errors.patientId" class="invalid-feedback">{{ errors.patientId }}</div>
       </div>
 
       <div class="form-group">
@@ -53,8 +53,8 @@ export default {
   name: 'CitaEdit',
   data() {
     return {
-      medicoList: [],
-      pacienteList: [],
+      doctorList: [],
+      patientList: [],
       mascotaList: [],
       motivoList: null,
       errors: {}
@@ -66,12 +66,12 @@ export default {
     validateForm() {
       this.errors = {};
 
-      if (!this.form.medicoId) {
-        this.errors.medicoId = 'El medico es obligatorio.';
+      if (!this.form.doctorId) {
+        this.errors.doctorId = 'El medico es obligatorio.';
       }
 
-      if (!this.form.pacienteId) {
-        this.errors.pacienteId = 'El paciente es obligatoria.';
+      if (!this.form.patientId) {
+        this.errors.patientId = 'El paciente es obligatoria.';
       }
 
       if (!this.form.motivo) {
@@ -92,14 +92,14 @@ export default {
       if (this.validateForm()) {
         this.save();
         this.form = {
-          pacienteId: null
+          patientId: null
         };
       }
     },
     save() {
       const vm = this;
       console.log(this.form);
-      this.axios.patch(this.baseUrl + "/citas/"+this.item.id, this.form)
+      this.axios.patch(this.baseUrl + "/appointments/"+this.item.id, this.form)
         .then(function (response) {
           if (response.status == '200') {
             vm.$emit('on-update', response.data);
@@ -110,36 +110,26 @@ export default {
           console.error(error);
         });
     },
-    getmedicoList() {
+    getdoctorList() {
       const vm = this;
-      this.axios.get(this.baseUrl + "/medicos")
+      this.axios.get(this.baseUrl + "/doctors")
         .then(function (response) {
-          vm.medicoList = response.data;
+          vm.doctorList = response.data;
         })
         .catch(function (error) {
           console.error(error);
         });
     },
-    getpacienteList() {
+    getpatientList() {
       const vm = this;
-      this.axios.get(this.baseUrl + "/pacientes")
+      this.axios.get(this.baseUrl + "/patients")
         .then(function (response) {
-          vm.pacienteList = response.data;
+          vm.patientList = response.data;
         })
         .catch(function (error) {
           console.error(error);
         });
     },
-    setMascotas(){
-      const vm = this;
-            this.axios.get(this.baseUrl + "/mascotas?pacienteId=" + this.form.pacienteId)
-                .then(function (response) {
-                    vm.mascotaList = response.data;
-                })
-                .catch(function (error) {
-                    console.error(error);
-                });
-    }
   },
   computed: {
     // propiedades computadas que dependen de otras propiedades reactivas
@@ -153,8 +143,8 @@ export default {
     }
   },
   mounted() {
-    this.getpacienteList();
-    this.getmedicoList();
+    this.getpatientList();
+    this.getdoctorList();
   },
 }
 </script>

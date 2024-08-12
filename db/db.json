@@ -1,5 +1,5 @@
 {
-  "pacientes": [
+  "patients": [
     {
       "id": "1",
       "nombre": "Juan Lopez",
@@ -71,9 +71,15 @@
       "telefono": "564564",
       "direccion": "lejania sn",
       "id": "8E1YV7v"
+    },
+    {
+      "nombre": "jack sparrow mamni",
+      "telefono": "678678678",
+      "direccion": "lejania",
+      "id": "wbU8FER"
     }
   ],
-  "cie10": [
+  "cie10s": [
     {
       "id": "1",
       "cod": "A00",
@@ -360,101 +366,72 @@
       "nombre": "Frambesia"
     }
   ],
-  "treatment":[
-    {
-    "id": "1",
-    "medicamento": "Ibuprofeno",
-    "dosis": "1 pastilla cada 8 horas",
-    "duracion": "7 días"
-    },
-    {
-    "id": "2",
-    "medicamento": "Paracetamol",
-    "dosis": "1 pastilla cada 6 horas",
-    "duracion": "5 días"
-    },
-    {
-    "id": "3",
-    "medicamento": "Amoxicilina",
-    "dosis": "1 pastilla cada 12 horas",
-    "duracion": "10 días"
-    },
-    {
-    "id": "4",
-    "medicamento": "Omeprazol",
-    "dosis": "1 pastilla cada 24 horas",
-    "duracion": "15 días"
-    },
-    {
-    "id": "5",
-    "medicamento": "Loratadina",
-    "dosis": "1 pastilla cada 24 horas",
-    "duracion": "7 días"
-    },
-    {
-    "id": "6",
-    "medicamento": "Diazepam",
-    "dosis": "1 pastilla cada 12 horas",
-    "duracion": "5 días"
-    },
-    {
-    "id": "7",
-    "medicamento": "Captopril",
-    "dosis": "1 pastilla cada 12 horas",
-    "duracion": "10 días"
-    }
-  ],
   "diagnoses": [
     {
       "id": "4",
-      "observacio": "xxxxxxxxxxxx xxxxxxxxxxx xxxxxxx",
-      "done": "True",
-      "pacienteId": "3",
+      "observacion": "xxxxxxxxxxxx xxxxxxxxxxx xxxxxxx",
+      "patientId": "3",
       "cie10Id": "6",
-      "treatmentId": "1"
+      "medicamento": "Ibuprofeno",
+      "dosis": "1 pastilla cada 8 horas",
+      "duracion": "7 días"
     },
     {
       "id": "5",
-      "observacio": "xxxxxxxxxxxx xxxxxxxxxxx xxxxxxx",
-      "done": "True",
-      "pacienteId": "4",
+      "observacion": "xxxxxxxxxxxx xxxxxxxxxxx xxxxxxx",
+      "patientId": "4",
       "cie10Id": "5",
-      "treatmentId": "2"
+      "medicamento": "Paracetamol",
+      "dosis": "1 pastilla cada 6 horas",
+      "duracion": "5 días"
     },
     {
       "id": "5",
-      "observacio": "xxxxxxxxxxxx xxxxxxxxxxx xxxxxxx",
-      "done": "True",
-      "pacienteId": "5",
+      "observacion": "xxxxxxxxxxxx xxxxxxxxxxx xxxxxxx",
+      "patientId": "5",
       "cie10Id": "9",
-      "treatmentId": "3"
+      "medicamento": "Amoxicilina",
+      "dosis": "1 pastilla cada 12 horas",
+      "duracion": "10 días"
     },
     {
       "id": "7",
-      "observacio": "xxxxxxxxxxxx xxxxxxxxxxx xxxxxxx",
-      "done": "True",
-      "pacienteId": "6",
+      "observacion": "xxxxxxxxxxxx xxxxxxxxxxx xxxxxxx",
+      "patientId": "6",
       "cie10Id": "10",
-      "treatmentId": "4"
+      "medicamento": "Amoxicilina",
+      "dosis": "1 pastilla cada 12 horas",
+      "duracion": "10 días"
     },
     {
       "id": "8",
-      "observacio": "xxxxxxxxxxxx xxxxxxxxxxx xxxxxxx",
-      "done": "True",
-      "pacienteId": "7",
+      "observacion": "xxxxxxxxxxxx xxxxxxxxxxx xxxxxxx",
+      "patientId": "7",
       "cie10Id": "1",
-      "treatmentId": "5"
+      "medicamento": "Loratadina",
+      "dosis": "1 pastilla cada 24 horas",
+      "duracion": "7 días"
     },
     {
       "id": "9",
-      "observacio": "xxxxxxxxxxxx xxxxxxxxxxx xxxxxxx",
-      "done": "True",
-      "pacienteId": "8",
+      "observacion": "xxxxxxxxxxxx xxxxxxxxxxx xxxxxxx",
+      "patientId": "8",
       "cie10Id": "2",
-      "treatmentId": "6"
+      "medicamento": "Captopril",
+      "dosis": "1 pastilla cada 12 horas",
+      "duracion": "10 días"
+    },
+    {
+      "patientId": "2",
+      "cie10Id": "5",
+      "observacionn": "cuidarse mucho",
+      "medicamento": "paracetamol",
+      "dosis": "1 cada dia",
+      "duracion": "2 semanas",
+      "id": "Epa5YlB"
     }
   ],
-  "medicos": [
+  "doctors": [
     {
       "id": "1",
       "nombre": "Dra. María López",
@@ -486,54 +463,90 @@
       "telefono": "555-2345"
     }
   ],
-  "citas": [
+  "appointments": [
     {
       "id": "3",
-      "pacienteId": "3",
-      "medicoId": "3",
+      "patientId": "3",
+      "doctorId": "3",
       "fecha": "2024-08-03",
       "hora": "11:00",
       "motivo": "Vacunación"
     },
     {
       "id": "4",
-      "pacienteId": "4",
-      "medicoId": "4",
+      "patientId": "4",
+      "doctorId": "4",
       "fecha": "2024-08-04",
       "hora": "12:00",
       "motivo": "Chequeo general"
     },
     {
       "id": "5",
-      "pacienteId": "5",
-      "medicoId": "5",
+      "patientId": "5",
+      "doctorId": "5",
       "fecha": "2024-08-05",
       "hora": "09:00",
       "motivo": "Revisión cardiológica"
     },
     {
       "id": "6",
-      "pacienteId": "6",
-      "medicoId": "1",
+      "patientId": "6",
+      "doctorId": "1",
       "fecha": "2024-08-06",
       "hora": "10:30",
       "motivo": "Chequeo general"
     },
     {
       "id": "7",
-      "pacienteId": "7",
-      "medicoId": "2",
+      "patientId": "7",
+      "doctorId": "2",
       "fecha": "2024-08-07",
       "hora": "11:30",
       "motivo": "Chequeo dermatológico"
     },
     {
       "id": "8",
-      "pacienteId": "8",
-      "medicoId": "3",
+      "patientId": "8",
+      "doctorId": "3",
       "fecha": "2024-08-08",
       "hora": "13:00",
       "motivo": "Chequeo general"
+    },
+    {
+      "doctorId": "1",
+      "patientId": "2",
+      "motivo": "xxxxxxxxx",
+      "fecha": "2024-08-13",
+      "hora": "22:31",
+      "id": "9"
+    },
+    {
+      "doctorId": "1",
+      "patientId": "8",
+      "motivo": "xxxxxxxxx",
+      "fecha": "2024-08-13",
+      "hora": "23:54",
+      "id": "11"
+    },
+    {
+      "doctorId": "2",
+      "patientId": "1",
+      "motivo": "xxxxxxxxx xxx",
+      "fecha": "2024-08-14",
+      "hora": "23:08",
+      "id": "XlSJLcb",
+      "patient": {
+        "id": "1",
+        "nombre": "Juan Lopez",
+        "telefono": "555-1234",
+        "direccion": "123 Calle Falsa"
+      },
+      "doctor": {
+        "id": "2",
+        "nombre": "Dr. Carlos Fernández",
+        "especialidad": "Dermatología",
+        "telefono": "555-4321"
+      }
     }
   ],
   "usuarios": [
@@ -550,7 +563,7 @@
       "name": "Rosa",
       "email": "rosa@example.com",
       "password": "123456",
-      "role": "doctor",
+      "role": "medico",
       "token": "sdffalsdf82weids8dfasdfsd9f0w9exdi8s"
     },
     {
@@ -566,7 +579,7 @@
       "name": "Raul",
       "email": "raul@example.com",
       "password": "123456",
-      "role": "doctor",
+      "role": "medico",
       "token": "asdfasdfsf82weids8dfasdfsd9f0fsi8s"
     },
     {

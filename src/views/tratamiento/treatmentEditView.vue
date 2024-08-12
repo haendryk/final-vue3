@@ -1,18 +1,18 @@
 <template>
   <div>
-    <h1>Editar Mascota</h1>
+    <h1>Editar tratamiento</h1>
     <form @submit.prevent="submitForm" v-if="form">
       <div class="form-group">
-        <label for="cliente">Cliente:</label>
-        <select id="cliente" v-model="form.clienteId" :class="{ 'is-invalid': errors.clienteId }">
-          <option :value="cliente.id" v-for="(cliente, index) in clienteList" :key="`cliente-${index}`">{{ cliente.nombre }}
+        <label for="patient">Paciente:</label>
+        <select id="patient" v-model="form.patientId" :class="{ 'is-invalid': errors.patientId }">
+          <option :value="patient.id" v-for="(patient, index) in patientList" :key="`patient-${index}`">{{ patient.nombre }}
           </option>
         </select>
-        <div v-if="errors.clienteId" class="invalid-feedback">{{ errors.clienteId }}</div>
+        <div v-if="errors.patientId" class="invalid-feedback">{{ errors.patientId }}</div>
       </div>
 
       <div class="form-group">
-        <label for="name">Nombre mascota:</label>
+        <label for="name">Nombre Tratamoento:</label>
         <input type="text" id="name" v-model="form.nombre" :class="{ 'is-invalid': errors.nombre }"
           placeholder="Ingrese el nombre" />
         <div v-if="errors.nombre" class="invalid-feedback">{{ errors.nombre }}</div>
@@ -47,14 +47,13 @@
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
 export default {
-  name: 'MascotaEdit',
+  name: 'DiagnosticoEdit',
   data() {
     return {
-      clienteList: [],
-      especieList: [
-        "Perro",
-        "Gato"
-      ],
+      patientList: [],
+      cie10List: [],
+      treatmentList: [],
+      observacio: '',
       errors: {}
     };
   },
@@ -79,8 +78,8 @@ export default {
         this.errors.edad = 'La edad es obligatoria.';
       }
 
-      if (!this.form.clienteId) {
-        this.errors.clienteId = 'El Cliente es obligatoria.';
+      if (!this.form.patientId) {
+        this.errors.patientId = 'El paciente es obligatoria.';
       }
 
       return Object.keys(this.errors).length === 0;
@@ -92,17 +91,17 @@ export default {
         this.save();
         // Reiniciar el formulario
         this.form = {
-          nombre: '',
-          especie: '',
+          paciente: '',
+          diagnostico: '',
           raza: '',
           edad: '',
-          clienteId: null
+          patientId: null
         };
       }
     },
     save() {
       const vm = this;
-      this.axios.patch(this.baseUrl + "/mascotas/" + this.item.id, this.form)
+      this.axios.patch(this.baseUrl + "/diagnostico/" + this.item.id, this.form)
         .then(function (response) {
           if (response.status == '200') {
             vm.$emit('on-update', response.data);
@@ -113,11 +112,11 @@ export default {
           console.error(error);
         });
     },
-    getClienteList() {
+    getpatientList() {
       const vm = this;
-      this.axios.get(this.baseUrl + "/clientes")
+      this.axios.get(this.baseUrl + "/patients")
         .then(function (response) {
-          vm.clienteList = response.data;
+          vm.patientList = response.data;
         })
         .catch(function (error) {
           console.error(error);
@@ -136,7 +135,7 @@ export default {
     }
   },
   mounted() {
-    this.getClienteList();
+    this.getpatientList();
   },
   props: ['item']
 }

@@ -77,7 +77,7 @@ export default {
     },
     save() {
       const vm = this;
-      this.axios.post(this.baseUrl + "/pacientes", this.form)
+      this.axios.post(this.baseUrl + "/patients", this.form)
         .then(function (response) {
           if (response.status == '201') {
             vm.$emit('on-register', response.data);
