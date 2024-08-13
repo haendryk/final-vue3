@@ -1,19 +1,17 @@
 <template>
     <div class="navbar">
         <div class="logo">MiLogo</div>
-        <!-- <div style="font-size: 14px; font-weight: 100;" v-if="isLoged">
-            {{ getUser['role'] }} \ {{ getUser['name'] }} <button @click="salir()">Salir</button>
+        <div style="font-size: 14px; font-weight: 100;" v-if="isLoged">
+            {{ getUser['role'] }} \ {{ getUser['name'] }}
         </div>    
-        <div style="font-size: 14px; font-weight: 100;" v-if="!isLoged">
-            <button @click="login()">Inisiar sesion</button>
-        </div>     -->
         <div class="menu">
             <router-link to="/">Bienvenido</router-link>
-            <router-link to="/login" v-if="!isLoged">Inicio de Sección</router-link>
-            <router-link to="{{ getUser['role'] }} \ {{ getUser['name'] }}" v-if="isLoged">Cerrar Seción</router-link>
-            <router-link to="/pacientes" v-if="canSee(['admin','secretaria','medico'])">Pacientes</router-link>
-            <router-link to="/diagnostico" v-if="canSee(['admin','medico'])">Diagnostico</router-link>
+
+            <router-link to="/pacientes" v-if="canSee(['admin','secretaria','doctor'])">Pacientes</router-link>
+            <router-link to="/diagnostico" v-if="canSee(['admin','doctor'])">Diagnostico</router-link>
             <router-link to="/cita" v-if="canSee(['admin','secretaria'])">Citas</router-link> 
+            <router-link to="/login" v-if="!isLoged">Inicio de Sección</router-link>
+            <router-link to="/" @click.prevent="salir" v-if="isLoged">Cerrar Sesión</router-link>
              <!-- <slot></slot> -->
         </div>
     </div>

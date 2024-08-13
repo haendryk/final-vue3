@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style=" padding-top: 50px;">
         <Modal v-model:modelValue="showModalNuevo">
             <CitaNewView @on-register="onRegister()" />
         </Modal>
@@ -8,8 +8,6 @@
         </Modal>
         <h1>Lista de Citas</h1>
         <button @click="showModalNuevo = true" class="btn btn-primary">Nuevo</button>
-        <button @click="buscar()" class="btn btn-lith" style="float:right">Buscar</button>
-        <input type="search" style="float:right" v-model="textToSearch" @search="buscar()">
         <div style="margin: 20px 0;">
             <h3>Filtros:</h3>
             <form @submit.prevent="filtrar()">
@@ -18,11 +16,6 @@
                 <input type="date" id="fecha" v-model="filter.fecha" placeholder="Ingrese la fecha" />
 
                 <label for="doctor"> doctor: </label>
-                <!-- <select id="doctor" v-model="filter.doctorId" :class="{ 'is-invalid': errors.doctorId }">
-                    <option value="">Todos</option>
-                    <option :value="doctor.id" v-for="(doctor, index) in doctorList" :key="`doctor-${index}`">{{ doctor.nombre }}
-                    </option> 
-                </select> -->
                 <select id="doctor" v-model="filter.doctorId">
                     <option value="">Todos</option>
                     <option :value="doctor.id" v-for="(doctor, index) in doctorList" :key="`doctor-${index}`">{{ doctor.nombre }}
@@ -98,7 +91,7 @@ export default {
         ...mapActions(['increment']),
         getList() {
             const vm = this;
-            this.axios.get(this.baseUrl + "/appointments?_sort=fecha,hora&_order=desc,asc&_expand=patient&_expand=doctor" + this.textToFilter + "&q=" + this.textToSearch)
+            this.axios.get(this.baseUrl + "/appointments?_sort=fecha,hora&_order=desc,asc&_expand=patient&_expand=doctor" + this.textToFilter)
                 .then(function (response) {
                     vm.itemList = response.data;
                     console.log(vm.itemList);
@@ -134,9 +127,6 @@ export default {
                     });
             }
 
-        },
-        buscar() {
-            this.getList();
         },
         filtrar() {
             this.textToFilter = '';

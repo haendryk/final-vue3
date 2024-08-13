@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style=" padding-top: 50px;">
         <Modal v-model:modelValue="showModalNuevo">
             <treatmentNew @on-register="onRegister($event)"/>
         </Modal>
@@ -8,8 +8,6 @@
         </Modal>
         <h1>Lista de Diagnosticos</h1>
         <button @click="showModalNuevo = true" class="btn btn-primary">Nuevo</button>
-        <button @click="buscar()" class="btn btn-lith" style="float:right">Buscar</button>
-        <input type="search" style="float:right" v-model="textToSearch" @search="buscar()">
         <table>
             <thead>
                 <tr>
@@ -33,7 +31,7 @@
                             <li>{{item.dosis}}</li>
                         </ul>
                     </td>
-                    <td>{{ item.observacio }}</td>
+                    <td>{{ item.observacion }}</td>
                     <td>
                         <button @click="edit(item)" class="btn btn-dark" style="margin-right: 15px;">Editar</button>
                         <button @click="Eliminar(item.id)" class="btn btn-danger">Eliminar</button>
@@ -75,7 +73,8 @@ export default {
         ...mapActions(['increment']),
         getList() {
             const vm = this;
-            this.axios.get(this.baseUrl + "/diagnoses?_expand=patient&_expand=treatment&_expand=cie10&q=" + this.textToSearch)
+           
+            this.axios.get(this.baseUrl + "/diagnoses?_expand=patient&_expand=treatment&_expand=cie10")
                 .then(function (response) {
                     vm.itemList = response.data;
                     console.log(response.data);
@@ -102,9 +101,7 @@ export default {
             }
 
         },
-        buscar() {
-            this.getList();
-        },
+       
         onRegister(event) {
             this.getList();
             this.showModalNuevo = false;

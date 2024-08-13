@@ -5,6 +5,7 @@
       <div class="form-group">
         <label for="pacient">Paciente:</label>
         <select id="pacient" v-model="form.patientId" :class="{ 'is-invalid': errors.patientId }">
+          <option value="" disabled selected>Seleccione un paciente</option>
           <option :value="patient.id" v-for="(patient, index) in patientList" :key="`patient-${index}`">{{ patient.nombre }}
           </option>
         </select>
@@ -14,28 +15,28 @@
       <div class="form-group">
         <label for="cie10">Diagnostico:</label>
         <select id="cie10" v-model="form.cie10Id" :class="{ 'is-invalid': errors.cie10Id }">
+          <option selected disabled>Seleccione un diagnostico</option>
           <option :value="cie10.id" v-for="(cie10, index) in cie10List" :key="`cie10-${index}`">{{ cie10.nombre }}
           </option>
+          
         </select>
-        <div v-if="errors.clienteId" class="invalid-feedback">{{ errors.clienteId }}</div>
+        <div v-if="errors.cie10Id" class="invalid-feedback">{{ errors.cie10Id }}</div>
       </div>
  
       <div class="form-group">
-        <label for="name">Medicamento:</label>
-        <input type="text" id="name" v-model="form.medicamento" :class="{ 'is-invalid': errors.medicamento }"
-          placeholder="Ingrese el nombre" />
+        <label for="medicamento">Medicamento:</label>
+        <input type="text" id="medicamento" v-model="form.medicamento" :class="{ 'is-invalid': errors.medicamento }" placeholder="Ingrese el Medicamento" />
         <div v-if="errors.medicamento" class="invalid-feedback">{{ errors.medicamento }}</div>
       </div>
+
       <div class="form-group">
-        <label for="name">Dosis:</label>
-        <input type="text" id="name" v-model="form.dosis" :class="{ 'is-invalid': errors.dosis }"
-          placeholder="Ingrese el nombre" />
+        <label for="dosis">Dosis:</label>
+        <input type="text" id="dosis" v-model="form.dosis" :class="{ 'is-invalid': errors.dosis }" placeholder="Ingrese Dosis" />
         <div v-if="errors.dosis" class="invalid-feedback">{{ errors.dosis }}</div>
       </div>
       <div class="form-group">
-        <label for="name">Duracion:</label>
-        <input type="text" id="name" v-model="form.duracion" :class="{ 'is-invalid': errors.duracion }"
-          placeholder="Ingrese el nombre" />
+        <label for="duracion">Duracion:</label>
+        <input type="text" id="duracion" v-model="form.duracion" :class="{ 'is-invalid': errors.duracion }" placeholder="Ingrese Duración" />
         <div v-if="errors.duracion" class="invalid-feedback">{{ errors.duracion }}</div>
       </div>
 
@@ -44,14 +45,6 @@
         <textarea id="observacion" rows="3" v-model="form.observacion" :class="{ 'is-invalid': errors.observacion }" placeholder="Ingrese el observacion"></textarea>
         <div v-if="errors.dosis" class="invalid-feedback">{{ errors.observacion }}</div>
       </div>
-
-      <!-- <div class="form-group">
-        <label for="especie">Especie:</label>
-        <select id="especie" v-model="form.especie" :class="{ 'is-invalid': errors.especie }">
-          <option :value="especie" v-for="(especie, index) in especieList" :key="`especie-${index}`">{{ especie }}</option>
-        </select>
-        <div v-if="errors.especie" class="invalid-feedback">{{ errors.especie }}</div>
-      </div> -->
 
       <button type="submit" class="btn btn-primary">Registrar</button>
     </form>
@@ -123,6 +116,7 @@ export default {
         };
       }
     },
+
     save() {
       const vm = this;
       this.axios.post(this.baseUrl + "/diagnoses", this.form)

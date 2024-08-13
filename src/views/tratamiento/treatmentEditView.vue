@@ -12,33 +12,41 @@
       </div>
 
       <div class="form-group">
-        <label for="name">Nombre Tratamoento:</label>
-        <input type="text" id="name" v-model="form.nombre" :class="{ 'is-invalid': errors.nombre }"
-          placeholder="Ingrese el nombre" />
-        <div v-if="errors.nombre" class="invalid-feedback">{{ errors.nombre }}</div>
-      </div>
-
-      <div class="form-group">
-        <label for="especie">Especie:</label>
-        <select id="especie" v-model="form.especie" :class="{ 'is-invalid': errors.especie }">
-          <option :value="especie" v-for="(especie, index) in especieList" :key="`especie-${index}`">{{ especie }}</option>
+        <label for="cie10">Diagnostico:</label>
+        <select id="cie10" v-model="form.cie10Id" :class="{ 'is-invalid': errors.cie10Id }">
+          <option :value="cie10.id" v-for="(cie10, index) in cie10List" :key="`cie10-${index}`">{{ cie10.nombre }}
+          </option>
         </select>
-        <div v-if="errors.especie" class="invalid-feedback">{{ errors.especie }}</div>
+        <div v-if="errors.cie10Id" class="invalid-feedback">{{ errors.cie10Id }}</div>
       </div>
 
       <div class="form-group">
-        <label for="raza">Raza:</label>
-        <input type="text" id="raza" v-model="form.raza" :class="{ 'is-invalid': errors.raza }"
-          placeholder="Ingrese la raza" />
-        <div v-if="errors.raza" class="invalid-feedback">{{ errors.raza }}</div>
+        <label for="name">Medicamento:</label>
+        <input type="text" id="name" v-model="form.medicamento" :class="{ 'is-invalid': errors.medicamento }"
+          placeholder="Ingrese el nombre" />
+        <div v-if="errors.medicamento" class="invalid-feedback">{{ errors.medicamento }}</div>
       </div>
 
       <div class="form-group">
-        <label for="edad">Edad (Anios):</label>
-        <input type="number" id="edad" v-model="form.edad" :class="{ 'is-invalid': errors.edad }"
-          placeholder="Ingrese la edad" />
-        <div v-if="errors.edad" class="invalid-feedback">{{ errors.edad }}</div>
+        <label for="name">Dosis:</label>
+        <input type="text" id="name" v-model="form.dosis" :class="{ 'is-invalid': errors.dosis }"
+          placeholder="Ingrese el nombre" />
+        <div v-if="errors.dosis" class="invalid-feedback">{{ errors.dosis }}</div>
       </div>
+
+      <div class="form-group">
+        <label for="name">Duracion:</label>
+        <input type="text" id="name" v-model="form.duracion" :class="{ 'is-invalid': errors.duracion }"
+          placeholder="Ingrese el nombre" />
+        <div v-if="errors.duracion" class="invalid-feedback">{{ errors.duracion }}</div>
+      </div>
+
+      <div class="form-group">
+        <label for="observacion">Observacion:</label>
+        <textarea id="observacion" rows="3" v-model="form.observacion" :class="{ 'is-invalid': errors.observacion }" placeholder="Ingrese el observacion"></textarea>
+        <div v-if="errors.dosis" class="invalid-feedback">{{ errors.observacion }}</div>
+      </div>
+
       <button type="submit" class="btn btn-primary">Registrar</button>
     </form>
   </div>
@@ -57,29 +65,31 @@ export default {
       errors: {}
     };
   },
+  props: ['item'],
   methods: {
     ...mapActions(['increment']),
     validateForm() {
       this.errors = {};
-
-      if (!this.form.nombre) {
-        this.errors.nombre = 'El nombre es obligatorio.';
-      }
-
-      if (!this.form.especie) {
-        this.errors.especie = 'La especie es obligatoria.';
-      }
-
-      if (!this.form.raza) {
-        this.errors.raza = 'La raza es obligatoria.';
-      }
-
-      if (!this.form.edad) {
-        this.errors.edad = 'La edad es obligatoria.';
-      }
-
+   
       if (!this.form.patientId) {
-        this.errors.patientId = 'El paciente es obligatoria.';
+        this.errors.patientId = 'Selecione un paciente.';
+      }
+
+      if (!this.form.cie10Id) {
+        this.errors.cie10Id = 'selecione diagnostico.';
+      }
+
+      if (!this.form.observacion) {
+        this.errors.observacion = 'Ingrese Observacion.';
+      }
+      if (!this.form.medicamento) {
+        this.errors.medicamento = 'Ingrese Observacion.';
+      }
+      if (!this.form.dosis) {
+        this.errors.dosis = 'Ingrese Observacion.';
+      }
+      if (!this.form.duracion) {
+        this.errors.duracion = 'Ingrese Observacion.';
       }
 
       return Object.keys(this.errors).length === 0;
@@ -91,17 +101,18 @@ export default {
         this.save();
         // Reiniciar el formulario
         this.form = {
-          paciente: '',
-          diagnostico: '',
-          raza: '',
-          edad: '',
-          patientId: null
+          patientId: null,
+          cie10Id: null,
+          observacion: '',
+          medicamento: '',
+          dosis: '',
+          duracion: '',
         };
-      }
+      };
     },
     save() {
       const vm = this;
-      this.axios.patch(this.baseUrl + "/diagnostico/" + this.item.id, this.form)
+      this.axios.patch(this.baseUrl + "/diagnoses/" + this.item.id, this.form)
         .then(function (response) {
           if (response.status == '200') {
             vm.$emit('on-update', response.data);
@@ -122,6 +133,16 @@ export default {
           console.error(error);
         });
     },
+    getCie10List() {
+      const vm = this;
+      this.axios.get(this.baseUrl + "/cie10s")
+        .then(function (response) {
+          vm.cie10List = response.data;
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
+    }
   },
   computed: {
     // propiedades computadas que dependen de otras propiedades reactivas
@@ -136,8 +157,8 @@ export default {
   },
   mounted() {
     this.getpatientList();
-  },
-  props: ['item']
+    this.getCie10List();
+  }
 }
 </script>
   

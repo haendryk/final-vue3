@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style=" padding-top: 50px;">
         <Modal v-model:modelValue="showModalNuevo">
             <RegisterPatientView @on-register="onRegister($event)" />
         </Modal>

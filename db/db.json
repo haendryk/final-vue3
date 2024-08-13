@@ -369,12 +369,23 @@
   "diagnoses": [
     {
       "id": "4",
-      "observacion": "xxxxxxxxxxxx xxxxxxxxxxx xxxxxxx",
-      "patientId": "3",
+      "observacion": "xxxxxxxxxxxx xxxxxxxxxxx",
+      "patientId": "9",
       "cie10Id": "6",
       "medicamento": "Ibuprofeno",
       "dosis": "1 pastilla cada 8 horas",
-      "duracion": "7 días"
+      "duracion": "7 días",
+      "patient": {
+        "id": "3",
+        "nombre": "Luis Martínez",
+        "telefono": "555-9999",
+        "direccion": "789 Calle Inventada"
+      },
+      "cie10": {
+        "id": "6",
+        "cod": "A05",
+        "nombre": "Otras intoxicaciones alimentarias bacterianas"
+      }
     },
     {
       "id": "5",
@@ -424,11 +435,29 @@
     {
       "patientId": "2",
       "cie10Id": "5",
-      "observacionn": "cuidarse mucho",
+      "observacion": "cuidarse mucho",
       "medicamento": "paracetamol",
       "dosis": "1 cada dia",
       "duracion": "2 semanas",
       "id": "Epa5YlB"
+    },
+    {
+      "patientId": "7",
+      "cie10Id": "13",
+      "observacion": "muchas",
+      "medicamento": "medicamento 1",
+      "dosis": "3 por dia",
+      "duracion": "3 semanas",
+      "id": "Zw2jKgg"
+    },
+    {
+      "patientId": "7",
+      "cie10Id": "13",
+      "observacion": "xxxxxxxxxxxxxx",
+      "medicamento": "medicamento 3",
+      "dosis": "2 horas",
+      "duracion": "4 dias",
+      "id": "SvwhzBa"
     }
   ],
   "doctors": [

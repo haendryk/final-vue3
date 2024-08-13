@@ -55,10 +55,10 @@ export default {
                         vm.$toast.show("Email o password no valido", "danger");
                     } else {
                         localStorage.setItem('user',JSON.stringify(response.data[0]));
+                        
                     }
-                    location.reload();
-                    console.log(response);
                     
+                    console.log(response);                 
                 })
                 .catch(function (error) {
                     console.error(error);

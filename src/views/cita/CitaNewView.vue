@@ -6,6 +6,7 @@
       <div class="form-group">
         <label for="doctor">medico:</label>
         <select id="doctor" v-model="form.doctorId" :class="{ 'is-invalid': errors.doctorId }">
+          <opttion value="">Seleccione un doctor</opttion>
           <option :value="doctor.id" v-for="(doctor, index) in doctorList" :key="`doctor-${index}`">{{ doctor.nombre }}
           </option>
         </select>
@@ -15,6 +16,7 @@
       <div class="form-group">
         <label for="patient">paciente:</label>
         <select id="patient" v-model="form.patientId" :class="{ 'is-invalid': errors.patientId }">
+          <option value="">Seleccione un paciente</option>
           <option :value="patient.id" v-for="(patient, index) in patientList" :key="`patient-${index}`">{{ patient.nombre }}
           </option>
         </select>
@@ -75,7 +77,7 @@ export default {
       }
 
       if (!this.form.doctorId) {
-        this.errors.doctorId = 'El paciente es obligatoria.';
+        this.errors.doctorId = 'El doctor es obligatoria.';
       }
 
       if (!this.form.motivo) {
